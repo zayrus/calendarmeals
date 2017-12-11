@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helpers'
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
-import Modal from 'react-modal'
-import ArrowRightIcon from 'react-icons/lib/arrow-circle-right'
-import Loading from 'react-loading'
+//import Modal from 'react-modal'
+import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right'
+//import Loading from 'react-loading'
 
 class App extends Component {
   render() {
@@ -23,6 +23,24 @@ class App extends Component {
           ))}
         </ul>
 
+        <div className="icon-grid">
+          { calendar.map(({ day, meals }) => (
+            <ul key={day}>
+              {mealOrder.map((meal) => (
+                <li key={meal} className='meal'>
+                  {meals[meal]
+                    ? <div className='food-item'>
+                        <img src={meals[meal].image} alt={meals[meal].label}/>
+                        <button onClick={() => remove({meal, day})}>Clear</button>
+                      </div>
+                      : <button className='icon-btn'>
+                        <CalendarIcon size={30}/>
+                      </button>}
+              </li>
+              ))}
+            </ul>
+          ))}
+        </div>
       </div>
     );
   }
